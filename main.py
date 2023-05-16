@@ -112,21 +112,21 @@ def filter_tasks(tasks, field, value):
 # Function to edit a task
 def edit_task(tasks):
     display_tasks(tasks)
-    task_id = int(input("Enter the ID of the task you want to edit: "))
+    task_name = input("Enter the name of the task you want to edit: ")
 
-    if task_id < 1 or task_id > len(tasks):
-        print("Invalid task ID.")
-    else:
-        task = tasks[task_id - 1]
-        field = input("Enter the field you want to edit (task, deadline, responsible, category): ")
+    for item in tasks:
+        if item[0] == task_name:
+            field = input("Enter the field you want to edit (task, deadline, responsible, category): ")
+            if field not in ["task", "deadline", "responsible", "category"]:
+                print("The entered field does not exist.")
+            else:
+                new_value = input("Enter the new value: ")
+                print(tasks)
+                item[field] = new_value
 
-        if field not in task:
-            print("The entered field does not exist.")
-        else:
-            new_value = input("Enter the new value: ")
-            task[field] = new_value
-            save_tasks(tasks)
+
             print("The task has been updated successfully.")
+            save_tasks(tasks)
 
 
 # Function to delete a task
